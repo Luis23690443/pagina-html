@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Junior H</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilo del carrusel */
+        .carrusel {
+            position: relative;
+            max-width: 700px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .carrusel img {
+            width: 100%;
+            height: 400px; /* Todas las imágenes tendrán el mismo alto */
+            object-fit: cover; /* Ajusta la imagen sin deformarla */
+            display: none;
+        }
+
+        .carrusel img.active {
+            display: block;
+        }
+
+        /* Botones */
+        .carrusel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .carrusel button:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- HEADER -->
+        <div id="header">
+            <div id="logo">
+                <img src="logojunior.png" alt="Logo Junior H">
+            </div>
+            <div id="slogan">
+                <h1>Junior H - Corridos Tumbados</h1>
+            </div>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div id="main">
+            <!-- LINKS -->
+            <div id="links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="biografia.html">Biografía</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="obras.html">Obras (Canciones)</a></li>
+                </ul>
+            </div>
+
+            <!-- INFORMACIÓN -->
+            <div id="info">
+                <h2>Galería</h2>
+                <p>A continuación, algunas imágenes representativas de Junior H:</p>
+                
+                <!-- CARRUSEL -->
+                <div class="carrusel">
+                    <img src="juniorconcierto.png" alt="Junior H en concierto" class="active">
+                    <img src="juniorposando.jpg" alt="Junior H posando">
+                    <img src="junior posando.jpg" alt="Junior H en sesión fotográfica">
+                    
+                    <!-- Botones -->
+                    <button class="prev" onclick="moverCarrusel(-1)">&#10094;</button>
+                    <button class="next" onclick="moverCarrusel(1)">&#10095;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                <strong>Alumno:</strong> Luis Antonio Ponce Navarro |
+                <strong>#Control:</strong> 23690443 |
+                <strong>Grupo:</strong> U |
+                <strong>Carrera:</strong> Ingeniería en Sistemas Computacionales |
+                <strong>Semestre:</strong> 5°
+            </p>
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA EL CARRUSEL -->
+    <script>
+        let indice = 0;
+        const imagenes = document.querySelectorAll('.carrusel img');
+
+        function mostrarImagen(n) {
+            imagenes.forEach((img, i) => {
+                img.classList.remove('active');
+                if (i === n) {
+                    img.classList.add('active');
+                }
+            });
+        }
+
+        function moverCarrusel(direccion) {
+            indice += direccion;
+            if (indice < 0) {
+                indice = imagenes.length - 1;
+            }
+            if (indice >= imagenes.length) {
+                indice = 0;
+            }
+            mostrarImagen(indice);
+        }
+
+        // Cambio automático cada 4 segundos
+        setInterval(() => {
+            moverCarrusel(1);
+        }, 4000);
+    </script>
+</body>
+</html>
